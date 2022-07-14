@@ -7,7 +7,7 @@ const longBreakTab= document.getElementById("longBreak");
 const pomodoroContent=document.getElementById("Pomodoro-content");
 const shortBreakContent=document.getElementById("Short Break-content");
 const longBreakContent=document.getElementById("Long Break-content");
-console.log(pomodoroTab);
+
 
 
 //2. add click event listner to each tab
@@ -53,7 +53,9 @@ function timer(seconds)
     const then=now+(seconds*1000);
     const timerinterval= setInterval(function(){
             const secondsleft= Math.round((then- Date.now())/1000);
-            console.log(secondsleft);
+            displayTime(secondsleft,pomodoroTime);
+            displayTime(secondsleft,shortBreakTime);
+            displayTime(secondsleft,longBreakTime);
             if(secondsleft< 1)
             {
                 clearInterval(timerinterval);
@@ -61,5 +63,30 @@ function timer(seconds)
             }
     },1000);
 };
+function displayTime(seconds,element){
+    const minute =Math.floor(seconds/60);
+    const second = seconds%60;
+    console.log({minute,second});
+    element.innerText= minute + " : " + second;
+}
+const pomodoroTime= document.getElementById("pomodoroTime");
 
-timer(5);
+const pomodoroButton= document.getElementById("pomodoroButton");
+pomodoroButton.addEventListener("click",function(){
+    const pomodoroTotalTime=1500;
+    timer(pomodoroTotalTime);
+})
+const shortBreakTime= document.getElementById("shortBreakTime");
+const shortBreakButton= document.getElementById("shortBreakButton");
+shortBreakButton.addEventListener("click",function(){
+    const shortBreakTotalTime=300;
+    timer(shortBreakTotalTime);
+})
+const longBreakTime= document.getElementById("longBreakTime");
+const longBreakButton= document.getElementById("longBreakButton");
+longBreakButton.addEventListener("click",function(){
+    const longBreakTotalTime=900;
+    timer(longBreakTotalTime);
+})
+
+
